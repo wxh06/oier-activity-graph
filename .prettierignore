@@ -1,4 +1,5 @@
 pnpm-lock.yaml
 .yarn/
+tsconfig.json
 dist/
 **/luogu/api-docs/
