@@ -38,7 +38,7 @@ const getRecords = async (user: number) => {
 };
 
 const activitiesPerDay = async (user: number) => {
-  const activities: Record<string, number | undefined> = {};
+  const activities: Record<string, number> = {};
   (await getRecords(user))
     .map(({ submitTime }) => DateTime.fromSeconds(submitTime).toISODate())
     .forEach((date) => {
@@ -48,5 +48,3 @@ const activitiesPerDay = async (user: number) => {
 };
 
 export default activitiesPerDay;
-
-activitiesPerDay(108135).then(console.log).catch(console.error);

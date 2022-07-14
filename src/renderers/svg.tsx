@@ -60,4 +60,4 @@ const render = (
   );
 };
 
-console.log(render({}, DateTime.fromObject({ year: 2022 }), DateTime.now()));
+export default render;
