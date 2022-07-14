@@ -1,9 +1,10 @@
 import axios from "axios";
+import { DateTime } from "luxon";
 import type { DataResponse, List, RecordBase } from "./api-docs/luogu-api";
 
 const cache: Record<number, RecordBase[]> = {};
 
-const getRecordPage = (
+const fetchRecordPage = (
   user: number,
   page: number,
   cached: RecordBase[]
@@ -25,17 +26,27 @@ const getRecordPage = (
         .map(({ id }) => id)
         .indexOf(records.result[records.result.length - 1].id);
       if (index >= 0) return records.result.concat(cached.slice(index + 1));
-      return records.result.concat(await getRecordPage(user, page + 1, cached));
+      return records.result.concat(
+        await fetchRecordPage(user, page + 1, cached)
+      );
     });
 
 const getRecords = async (user: number) => {
-  const records = await getRecordPage(user, 1, cache[user] ?? []);
+  const records = await fetchRecordPage(user, 1, cache[user] ?? []);
   cache[user] = records;
   return records;
 };
 
-getRecords(108135)
-  .then((records) => records.map(({ submitTime }) => submitTime))
-  .then((t) => t.map((time) => new Date(time * 1000)))
-  .then(console.log)
-  .catch(console.error);
+const activitiesPerDay = async (user: number) => {
+  const activities: Record<string, number | undefined> = {};
+  (await getRecords(user))
+    .map(({ submitTime }) => DateTime.fromSeconds(submitTime).toISODate())
+    .forEach((date) => {
+      activities[date] = (activities[date] ?? 0) + 1;
+    });
+  return activities;
+};
+
+export default activitiesPerDay;
+
+activitiesPerDay(108135).then(console.log).catch(console.error);
