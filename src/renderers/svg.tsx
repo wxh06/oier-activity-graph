@@ -8,6 +8,16 @@ interface ActivitiesPerDay {
 }
 
 function Day({ count, date }: { count: number; date: DateTime }) {
+  let level = Math.floor(count / 5);
+  if (level > 5) level = 5;
+  const fill = [
+    "#f7f6f7",
+    "#d4ffc0",
+    "#b0ff80",
+    "#7fff54",
+    "#4fff28",
+    "#35dd20",
+  ][level];
   return (
     <rect
       width={10}
@@ -16,8 +26,10 @@ function Day({ count, date }: { count: number; date: DateTime }) {
       y={(date.weekday % 7) * 13}
       rx={2}
       ry={2}
+      fill={fill}
       data-count={count}
       data-date={date.toISODate()}
+      data-level={level}
     >
       <title>{`${date.toISODate()}: ${count}`}</title>
     </rect>
