@@ -1,0 +1,8 @@
+---
+packages:
+  - "!lib/snk"
+  - "lib/snk/packages/action"
+  - "lib/snk/packages/github-user-contribution"
+  - "lib/snk/packages/solver"
+  - "lib/snk/packages/svg-creator"
+  - "lib/snk/packages/types"

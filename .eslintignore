@@ -1,3 +1,4 @@
 .yarn/
 dist/
+lib/
 **/luogu/api-docs/

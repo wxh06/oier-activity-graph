@@ -15,6 +15,10 @@
   },
   "license": "MIT",
   "dependencies": {
+    "@snk/action": "workspace:1.0.0",
+    "@snk/solver": "workspace:1.0.0",
+    "@snk/svg-creator": "workspace:1.0.0",
+    "@snk/types": "workspace:1.0.0",
     "axios": "^0.27.2",
     "luxon": "^3.0.1",
     "react": "^18.2.0",
@@ -41,5 +45,23 @@
     "prettier": "^2.7.1",
     "ts-node": "^10.8.2",
     "typescript": "^4.7.4"
+  },
+  "pnpm": {
+    "overrides": {
+      "@snk/gif-creator": "link:lib/snk/packages/gif-creator"
+    },
+    "packageExtensions": {
+      "@snk/svg-creator": {
+        "dependencies": {
+          "@snk/gif-creator": "link:../gif-creator",
+          "@snk/types": "workspace:1.0.0"
+        }
+      },
+      "@snk/gif-creator": {
+        "dependencies": {
+          "@snk/types": "workspace:1.0.0"
+        }
+      }
+    }
   }
 }

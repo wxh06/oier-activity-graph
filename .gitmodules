@@ -1,3 +1,6 @@
 [submodule "luogu-api-docs"]
 	path = src/sources/luogu/api-docs
 	url = ../../0f-0b/luogu-api-docs
+[submodule "snk"]
+	path = lib/snk
+	url = ../../Platane/snk
